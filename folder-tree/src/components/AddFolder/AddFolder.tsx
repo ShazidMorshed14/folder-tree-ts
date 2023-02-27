@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { generate } from "../Data/randomNumberGenerator";
@@ -47,6 +48,24 @@ const AddFolder: React.FC<AddFolderProps> = ({ explorer, setExplorer }) => {
         setExplorer(explorer);
         console.log("explorer", explorer);
       }
+
+      const reqBody = {
+        _id: explorer._id,
+        items: explorer.items,
+      };
+
+      axios
+        .put("/api/data/update", reqBody)
+        .then((response) => {
+          //console.log("success response", response.data);
+          if (response.data.Data.id) {
+            console.log("update api response-->", response.data);
+            setExplorer(response.data.Data);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
       console.log("after update", explorer);
       navigate("/");

@@ -1,19 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Folder from "./components/Folder";
 // import explorer from "./components/Data/folderData";
 import "./App.css";
+import axios from "axios";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddFolder from "./components/AddFolder/AddFolder";
 import DeleteFolder from "./components/DeleteFolder/DeleteFolder";
 
 function App() {
-  const [explorer, setExplorer] = useState<any>({
-    id: "Root",
-    name: "Root",
-    isFolder: true,
-    items: [],
-  });
+  const [explorer, setExplorer] = useState<any>();
+
+  const fetchData = () => {
+    axios
+      .get("/api/data")
+      .then((response) => {
+        //console.log("success response", response.data);
+        if (response.data.Data.id) {
+          console.log("api response-->", response.data);
+          setExplorer(response.data.Data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className="App">
       <h1>Folder Structure Tree</h1>
