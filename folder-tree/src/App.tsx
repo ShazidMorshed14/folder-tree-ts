@@ -7,13 +7,14 @@ import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddFolder from "./components/AddFolder/AddFolder";
 import DeleteFolder from "./components/DeleteFolder/DeleteFolder";
+import { BASE_URL } from "./helper/helper";
 
 function App() {
   const [explorer, setExplorer] = useState<any>();
 
   const fetchData = () => {
     axios
-      .get("/api/data")
+      .get(`${BASE_URL}/api/data`)
       .then((response) => {
         //console.log("success response", response.data);
         if (response.data.Data.id) {

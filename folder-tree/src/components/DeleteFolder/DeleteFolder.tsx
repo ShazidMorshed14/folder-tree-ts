@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../../helper/helper";
 import { generate } from "../Data/randomNumberGenerator";
 
 export interface DeleteFolderProps {
@@ -37,7 +38,7 @@ const DeleteFolder: React.FC<DeleteFolderProps> = ({
     };
 
     axios
-      .put("/api/data/update", reqBody)
+      .put(`${BASE_URL}/api/data/update`, reqBody)
       .then((response) => {
         //console.log("success response", response.data);
         if (response.data.Data.id) {
