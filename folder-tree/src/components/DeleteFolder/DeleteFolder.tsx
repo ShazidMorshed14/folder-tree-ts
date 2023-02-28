@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { generate } from "../Data/randomNumberGenerator";
 
 export interface DeleteFolderProps {
@@ -42,6 +43,12 @@ const DeleteFolder: React.FC<DeleteFolderProps> = ({
         if (response.data.Data.id) {
           console.log("update api response-->", response.data);
           setExplorer(response.data.Data);
+          toast.error("Folder Deleted Successfully!", {
+            autoClose: 1000,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+          });
         }
       })
       .catch((error) => {

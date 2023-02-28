@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { generate } from "../Data/randomNumberGenerator";
+import { toast } from "react-toastify";
 
 export interface AddFolderProps {
   explorer: any;
@@ -42,10 +43,22 @@ const AddFolder: React.FC<AddFolderProps> = ({ explorer, setExplorer }) => {
           items: [],
         });
         setExplorer(explorer);
+        toast.success("Folder Added Successfully!", {
+          autoClose: 1000,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+        });
         console.log("explorer", explorer);
       } else {
         add(explorer.items, parentId, folderName, folderId);
         setExplorer(explorer);
+        toast.success("Folder Added Successfully!", {
+          autoClose: 1000,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+        });
         console.log("explorer", explorer);
       }
 
