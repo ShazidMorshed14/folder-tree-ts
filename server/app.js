@@ -8,7 +8,7 @@ app.use(express.json());
 //importing mongoDB connection function
 const connectDB = require("./db/connect");
 
-const PORT = process.env.PORT | 5000;
+const PORT = process.env.PORT || 5000;
 
 //importing the routes
 const data_routes = require("./routes/data");
